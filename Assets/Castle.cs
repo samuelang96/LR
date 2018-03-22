@@ -16,7 +16,7 @@ public class Castle : Establishment {
 	override protected void GenerateArchitecture(){
 		for (int i = 0; i < building_num; i++) {
 			GameObject side_tower = Instantiate (building, transform);
-			float fatness = Random.Range (0.005f, 0.15f);
+			float fatness = Random.Range (0.05f, 0.15f);
 			float height = Random.Range (0.25f, 0.75f);
 			side_tower.transform.localScale = new Vector3 (fatness, height, fatness);
 			float offset_X = Random.Range (-.3f, .3f);

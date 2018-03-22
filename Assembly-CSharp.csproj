@@ -52,6 +52,10 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Agent.cs" />
+     <Compile Include="Assets\AgentOrder.cs" />
+     <Compile Include="Assets\Burn.cs" />
+     <Compile Include="Assets\Capture.cs" />
+     <Compile Include="Assets\Caravan.cs" />
      <Compile Include="Assets\Castle.cs" />
      <Compile Include="Assets\Establishment.cs" />
      <Compile Include="Assets\LevelController.cs" />

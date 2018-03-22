@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Village : Establishment {
-
+	public Castle master;
+	public GameObject caravan;
 	// Use this for initialization
 	void Start () {
 		base.Start ();
+		master = GameObject.Find ("LevelController").GetComponent<LevelController> ().player_castle;
 	}
 	
 	// Update is called once per frame
@@ -16,6 +18,12 @@ public class Village : Establishment {
 
 	override protected void Produce(){
 		Debug.Log ("HOLY HELL");
+
+		Caravan new_caravan = Instantiate (caravan, transform.position, Quaternion.identity).GetComponent<Caravan>();
+		new_caravan.food = (int)population * 2;
+		//Debug.Log(master.transform.position);
+
+		new_caravan.Journey (this, master);
 	}
 
 

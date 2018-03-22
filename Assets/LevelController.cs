@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class LevelController : MonoBehaviour {
 	public GameObject castle, village;
-	public int villages = 10;
+	int villages = 2;
 	float zero_pos = -4.5f;
 	List<Establishment> establishments;
 	List<Vector2> cords;
+	public Castle player_castle;
 
 	// Use this for initialization
 	void Start () {
@@ -33,7 +34,7 @@ public class LevelController : MonoBehaviour {
 
 
 
-		GameObject new_castle = Instantiate(castle, new Vector3(zero_pos + cords[0].x * 1f, 0, zero_pos + cords[0].y * 1f), Quaternion.identity);
+		player_castle = Instantiate(castle, new Vector3(zero_pos + cords[0].x * 1f, 0, zero_pos + cords[0].y * 1f), Quaternion.identity).GetComponent<Castle>();
 		for (int i = 1; i < villages; i++) {
 			GameObject new_village = Instantiate(village, new Vector3(zero_pos + cords[i].x * 1f, 0, zero_pos + cords[i].y * 1f), Quaternion.identity);
 		}

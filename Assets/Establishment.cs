@@ -9,9 +9,12 @@ public class Establishment : MonoBehaviour {
 	public float population;
 	protected float growth_rate = 1.011f;
 	public string name = "NAME";
+	public int food = 0;
+
 
 	// Use this for initialization
 	protected void Start () {
+		
 		nw = GameObject.Find ("NameWizard").GetComponent<NameWizard> ();
 		name = nw.RandomName ();
 		GenerateArchitecture ();
@@ -33,7 +36,7 @@ public class Establishment : MonoBehaviour {
 		}
 	}
 	bool producing = true;
-	public float production_time_max = 5;
+	public float production_time_max = 10;
 	public float production_time = 0;
 	IEnumerator ProduceRoutine(){
 		while (producing) {

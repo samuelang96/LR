@@ -10,10 +10,19 @@ public class PlayerInputController : MonoBehaviour {
 
 	public Text name_text;
 	public Text population_text;
+	public Text order_text;
+	public Text order_description_text;
+	List<AgentOrder> agent_orders;
+	int agent_orders_index = -1;
 
 	// Use this for initialization
 	void Start () {
 		reticle = GameObject.Find ("Reticle").GetComponent<Reticle> ();
+		name_text.text = "";
+		population_text.text = "";
+		agent_orders = new List<AgentOrder> ();
+		agent_orders.Add (new Capture ());
+		agent_orders.Add (new Burn ());
 	}
 	
 	// Update is called once per frame
@@ -21,6 +30,16 @@ public class PlayerInputController : MonoBehaviour {
 		ScanInput ();
 	}
 
+	void ChangeOrder(){
+		agent_orders_index += 1;
+		if (agent_orders_index < 0 || agent_orders_index >= agent_orders.Count) {
+			agent_orders_index = 0;
+		}
+		order_text.text = agent_orders [agent_orders_index].name;
+		order_description_text.text = agent_orders [agent_orders_index].description;
+	}
+
+	bool can_change_order = false;
 	void ScanInput(){
 		if (Input.GetAxisRaw ("Vertical") > 0) {
 			reticle.MoveNorth ();
@@ -41,6 +60,12 @@ public class PlayerInputController : MonoBehaviour {
 		if (Input.GetAxisRaw ("Horizontal") == 0) {
 			reticle.StopX ();
 		}
+		if (Input.GetAxisRaw ("ChangeOrder") != 0 && can_change_order) {
+			ChangeOrder ();
+			can_change_order = false;
+		} else if(Input.GetAxisRaw ("ChangeOrder") == 0){
+			can_change_order = true;
+		}
 
 	}
 
@@ -50,7 +75,8 @@ public class PlayerInputController : MonoBehaviour {
 	public void ClearText(){
 		name_text.text = "";
 		population_text.text = "";
-
+		order_text.text = "";
+		order_description_text.text = "";
 	}
 
 	public void StopTypingRoutines(){
